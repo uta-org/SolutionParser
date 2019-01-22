@@ -12,9 +12,6 @@ namespace Onion.SolutionParser.Parser
             SolutionContents = solutionContents;
         }
 
-        public virtual IEnumerable<T> Parse()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract IEnumerable<T> Parse();
     }
 }
