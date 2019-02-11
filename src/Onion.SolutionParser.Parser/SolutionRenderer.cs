@@ -42,6 +42,9 @@ namespace Onion.SolutionParser.Parser
 
         private void RenderProject(Project project, StringWriter sb)
         {
+            if (project == null)
+                return;
+
             sb.WriteLine("Project(\"{0}\") = \"{1}\", \"{2}\", \"{3}\"", project.TypeGuid.ToString("B").ToUpperInvariant(), project.Name, project.Path, project.Guid.ToString("B").ToUpperInvariant());
             if (project.ProjectSection != null)
             {
@@ -49,7 +52,6 @@ namespace Onion.SolutionParser.Parser
                 foreach (var entry in project.ProjectSection.Entries)
                 {
                     sb.WriteLine("\t\t{0} = {1}", entry.Key, entry.Value);
-
                 }
                 sb.WriteLine("\tEndProjectSection");
             }
@@ -82,8 +84,10 @@ namespace Onion.SolutionParser.Parser
             {
                 case ProjectSectionType.PostProject:
                     return "postProject";
+
                 case ProjectSectionType.PreProject:
                     return "preProject";
+
                 default:
                     throw new ArgumentOutOfRangeException("type", type, null);
             }
@@ -95,8 +99,10 @@ namespace Onion.SolutionParser.Parser
             {
                 case GlobalSectionType.PostSolution:
                     return "postSolution";
+
                 case GlobalSectionType.PreSolution:
                     return "preSolution";
+
                 default:
                     throw new ArgumentOutOfRangeException("type", type, null);
             }
